@@ -1,0 +1,8 @@
+{
+  "name": "carepoint-hospital-patient-registration",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hospital Patient Registration System for Vercel with Supabase PostgreSQL",
+  "engines": { "node": ">=20" },
+  "dependencies": { "@supabase/supabase-js": "^2.57.4" }
+}

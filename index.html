@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CarePoint | Hospital Patient System</title><link rel="stylesheet" href="/style.css"></head>
+<body>
+<aside class="sidebar">
+  <div class="brand"><div class="brand-icon">✚</div><div><strong>CarePoint</strong><small>Hospital Management</small></div></div>
+  <div class="nav-label">MAIN MENU</div>
+  <a class="nav active" href="#home" data-page="home"><span>⌂</span> Home</a>
+  <a class="nav" href="#registration" data-page="registration"><span>＋</span> Registration</a>
+  <a class="nav" href="#records" data-page="records"><span>▤</span> Patient Records</a>
+  <a class="nav" href="#about" data-page="about"><span>ⓘ</span> About Project</a>
+  <div class="sidebar-bottom"><div class="status-dot"></div><div><b>System ready</b><small>Vercel + Supabase PostgreSQL</small></div></div>
+</aside>
+<main class="main">
+<header class="topbar"><div><div class="eyebrow">HOSPITAL MANAGEMENT SYSTEM</div><h1 id="pageTitle">Home Dashboard</h1><p id="pageSubtitle">A simple place to manage patient information.</p></div><div class="date-chip"><span class="live-dot"></span> Local system</div></header>
+<section class="page active-page" id="page-home">
+  <div class="welcome-card"><div><div class="welcome-kicker">WELCOME TO CAREPOINT</div><h2>Patient care starts with good records.</h2><p>Register patients, find their details, and keep records organised.</p><button class="btn btn-white" data-go="registration">＋ Register a patient</button></div><div class="welcome-symbol">✚</div></div>
+  <div class="stats">
+    <article class="stat-card"><div class="stat-icon green">♙</div><div><span>Total patients</span><strong id="totalCount">0</strong><small>All saved patient records</small></div></article>
+    <article class="stat-card"><div class="stat-icon blue">＋</div><div><span>Registration</span><strong>Easy</strong><small>Simple patient entry form</small></div></article>
+    <article class="stat-card"><div class="stat-icon amber">⌕</div><div><span>Record search</span><strong>Quick</strong><small>Search by name, ID or phone</small></div></article>
+  </div>
+  <div class="home-grid"><section class="panel"><div class="panel-heading"><div><span class="section-kicker">QUICK ACTIONS</span><h2>What would you like to do?</h2></div></div><div class="quick-actions"><button class="quick-action" data-go="registration"><span class="quick-icon green">＋</span><span><b>Register Patient</b><small>Add a new patient to the system</small></span><span class="arrow">›</span></button><button class="quick-action" data-go="records"><span class="quick-icon blue">▤</span><span><b>View Patient Records</b><small>Search, edit or delete saved records</small></span><span class="arrow">›</span></button></div></section>
+  <section class="panel"><div class="panel-heading"><div><span class="section-kicker">HOW IT WORKS</span><h2>Three simple steps</h2></div></div><div class="steps"><div><b>1</b><span><strong>Register</strong><small>Enter patient details</small></span></div><div><b>2</b><span><strong>Save</strong><small>Supabase saves data online</small></span></div><div><b>3</b><span><strong>Manage</strong><small>Search, update or delete</small></span></div></div></section></div>
+  <section class="panel"><div class="panel-heading"><div><span class="section-kicker">LATEST ENTRIES</span><h2>Recently registered patients</h2></div><button class="btn btn-light" data-go="records">View all records →</button></div><div class="table-wrap"><table><thead><tr><th>Patient</th><th>Patient ID</th><th>Age / Gender</th><th>Phone</th><th>Blood group</th></tr></thead><tbody id="recentRows"><tr><td colspan="5" class="empty">Loading records…</td></tr></tbody></table></div></section>
+</section>
+<section class="page" id="page-registration"><section class="panel"><div class="panel-heading"><div><span class="section-kicker">PATIENT DETAILS</span><h2 id="formTitle">Register a new patient</h2><p class="panel-description">Fields marked with * must be completed.</p></div><span class="required-note">* Required fields</span></div>
+<form id="patientForm"><div class="form-grid">
+<label>Full name *<input id="fullName" name="fullName" placeholder="e.g. Aarav Sharma" required maxlength="100"></label>
+<label>Age *<input id="age" name="age" type="number" min="0" max="120" placeholder="Age in years" required></label>
+<label>Gender *<select id="gender" name="gender" required><option value="">Select gender</option><option>Female</option><option>Male</option><option>Other</option></select></label>
+<label>Phone number *<input id="phone" name="phone" placeholder="e.g. 9876543210" required maxlength="20"></label>
+<label>Blood group *<select id="bloodGroup" name="bloodGroup" required><option value="">Select blood group</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option><option>O+</option><option>O-</option><option>Unknown</option></select></label>
+<label>Symptoms / reason for visit *<input id="symptoms" name="symptoms" placeholder="Brief reason for visit" required maxlength="300"></label>
+<label class="span-3">Address *<input id="address" name="address" placeholder="Street, area, city" required maxlength="250"></label></div>
+<div class="form-actions"><p>Data is stored in your Supabase PostgreSQL database.</p><div><button type="button" class="btn btn-light" id="clearBtn">Clear form</button><button type="submit" class="btn btn-primary" id="submitBtn">＋ Register patient</button></div></div></form></section>
+<div class="tip-card"><span>💡</span><div><b>Tip</b><p>Enter the patient's details carefully. After saving, open Patient Records to find or update the record.</p></div></div>
+</section>
+<section class="page" id="page-records"><section class="panel records-panel"><div class="records-head"><div><span class="section-kicker">PATIENT DATABASE</span><h2>Patient Records <span class="count-pill" id="tableCount">0</span></h2><p class="panel-description">Search patient details or use the action buttons to edit and delete.</p></div><button class="btn btn-primary" data-go="registration">＋ New patient</button></div><div class="records-tools"><div class="search-box"><span>⌕</span><input id="searchInput" placeholder="Search name, patient ID or phone…"><button id="searchBtn" class="btn btn-dark">Search</button></div><button id="resetSearchBtn" class="btn btn-light">Clear search</button></div>
+<div class="table-wrap"><table><thead><tr><th>Patient</th><th>Patient ID</th><th>Age / Gender</th><th>Phone</th><th>Blood group</th><th>Registered</th><th>Actions</th></tr></thead><tbody id="patientRows"><tr><td colspan="7" class="empty">Loading patient records…</td></tr></tbody></table></div><div class="table-footer"><span id="resultText">Showing 0 records</span><span>Use Edit to change details</span></div></section></section>
+<section class="page" id="page-about"><section class="panel"><span class="section-kicker">PROJECT INFORMATION</span><h2>Hospital Patient Registration System</h2><p class="about-lead">An academic mini project for registering and managing basic patient information.</p><div class="tech-grid"><div><b>HTML</b><small>Page structure</small></div><div><b>CSS</b><small>Design and layout</small></div><div><b>JavaScript</b><small>Form and page actions</small></div><div><b>Vercel Functions</b><small>Server-side API</small></div><div><b>Supabase PostgreSQL</b><small>Online SQL database</small></div></div><h2 class="subheading">Main features</h2><ul class="feature-list"><li>Register a patient with required details</li><li>Automatically generate a patient ID</li><li>View and search patient records</li><li>Edit existing patient information</li><li>Delete a record after confirmation</li><li>Store records in Supabase PostgreSQL</li></ul><div class="notice"><b>For college demonstration only</b><p>Use sample data only. This educational project does not include hospital-grade security or user authentication.</p></div></section></section>
+<footer>CarePoint Hospital Patient System <span>Academic mini project · HTML, CSS, JavaScript, Vercel Functions + PostgreSQL</span></footer>
+</main><div id="toast" class="toast" role="status"></div><script src="/app.js"></script></body></html>
